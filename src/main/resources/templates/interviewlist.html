@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Список собеседований</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .search-form {
+            margin-bottom: 20px;
+        }
+
+        .interview-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Просмотр собеседований</h1>
+        <a href="/" class="home-link">
+            <i class="fas fa-home"></i> На главную
+        </a>
+    </div>
+
+    <div class="search-form">
+        <form th:action="@{/interviews/search}" method="get">
+            <div class="row">
+                <div class="col-md-3">
+                    <select name="userId" class="form-control">
+                        <option value="">Выберите пользователя</option>
+                        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.tgUsername}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="date" name="date" class="form-control" placeholder="Поиск по дате">
+                </div>
+                <div class="col-md-3">
+                    <select name="levelId" class="form-control">
+                        <option value="">Выберите уровень</option>
+                        <option th:each="level : ${levels}" th:value="${level.id}" th:text="${level.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Поиск</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div th:if="${interviews.isEmpty()}">
+        <p>Собеседований не найдено</p>
+    </div>
+
+    <div th:unless="${textToPrint.isEmpty()}">
+        <p><strong th:text="${textToPrint}"></strong></p>
+    </div>
+
+    <div th:each="interview : ${interviews}">
+        <div class="interview-item">
+            <h3>Собеседование №<span th:text="${interview.id}"></span></h3>
+            <p>
+                <strong>Пользователь:</strong> <span th:text="${interview.user}"></span><br>
+                <strong>Дата:</strong> <span th:text="${#temporals.format(interview.date, 'dd.MM.yyyy HH:mm')}"></span><br>
+                <strong>Уровень:</strong> <span th:text="${interview.level}"></span><br>
+                <strong>Оценка:</strong> <span th:text="${interview.resultGrade}"></span><br>
+                <strong>Отзыв:</strong> <span th:text="${interview.feedback}"></span>
+            </p>
+
+            <h4>Заданные вопросы</h4>
+            <div th:each="question : ${interview.askedQuestions}">
+                <p>
+                    <strong>Вопрос:</strong> <span th:text="${question.question}"></span><br>
+                    <strong>Ответ:</strong> <span th:text="${question.answer}"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

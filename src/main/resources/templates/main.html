@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Interview Bot Settings</title>
+    <style>
+        .large-text {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="display: flex; flex-direction: column; align-items: center;">
+    <h1>Бот для собеседований</h1>
+    <img th:src="@{bot_picture.jpg}" style="width: 200px; height: auto; display: block; margin: 20px 0;" alt="bot"/>
+
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+        <a href="/questions" class="large-text">
+            Управление вопросами
+        </a>
+
+        <a href="/interviews" class="large-text">
+            Результаты собеседований
+        </a>
+    </div>
+</div>
+</body>
+</html>

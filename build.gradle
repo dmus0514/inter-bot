@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.2'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'gptBot'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation ("ch.qos.logback:logback-classic")
+    implementation ("org.flywaydb:flyway-core")
+    implementation ("org.postgresql:postgresql")
+    implementation ("org.springframework.boot:spring-boot-starter")
+    implementation ("org.springframework.boot:spring-boot-starter-web")
+    implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation ("org.springframework.boot:spring-boot-starter-test")
+    implementation ("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation ("org.telegram:telegrambots:6.9.7.1")
+    implementation ("org.springframework.kafka:spring-kafka")
+    implementation ("com.fasterxml.jackson.core:jackson-databind")
+    implementation ("org.projectlombok:lombok")
+
+    runtimeOnly("org.flywaydb:flyway-database-postgresql")
+
+    annotationProcessor ("org.projectlombok:lombok")
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
