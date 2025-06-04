@@ -16,6 +16,10 @@ import java.util.List;
 @Slf4j
 public class DBServiceInterview {
 
+    //set start date as the certain starting date which will definitely be before any interview date
+    private static final LocalDateTime START_DATE = LocalDateTime.of(2025, 1, 1, 0, 0);
+    private static final LocalDateTime END_DATE = LocalDateTime.of(2038, 1, 19, 3, 14); //end of epoch
+
     private final InterviewsRepository interviewsRepository;
     private final LevelsRepository levelsRepository;
 
@@ -40,8 +44,8 @@ public class DBServiceInterview {
         LocalDateTime startDate;
         LocalDateTime endDate;
         if (localDate == null) { //if date is not set initially then set it to edge values to make the search work
-            startDate = LocalDateTime.of(2025, 1, 1, 0, 0);
-            endDate = LocalDateTime.of(2038, 1, 19, 3, 14); //end of epoch
+            startDate = START_DATE;
+            endDate = END_DATE;
         } else {
             startDate = localDate.atStartOfDay();
             endDate = localDate.atTime(LocalTime.MAX);

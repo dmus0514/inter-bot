@@ -5,12 +5,13 @@ import org.springframework.stereotype.Repository;
 import com.dmus.dto.Question;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 
 @Repository
 public class InterviewSessionsRepository {
 
-    private final Map<String, UserSession> userQuestions = new HashMap<>();
+    private final Map<String, UserSession> userQuestions = new ConcurrentHashMap<>();
 
     public void setLevel(String userName, InterviewLevel level) {
         userQuestions.put(userName, new UserSession(level));

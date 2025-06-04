@@ -2,12 +2,12 @@ server:
   port: 8080
 
 bot:
-  token: 7906805619:AAEPu_pWnBN3cFWZvc0VtJDJEnGbtH3KpGY
+  token:
   name: dmus_inter_bot
 
 yandex:
   api:
-    key: t1.9euelZrMz5zHiZLGz5vJl5yZnJeNyu3rnpWaycfLjI_KiZWQic6PycmUlJHl8_ctcAo--e8wHCs-_d3z920eCD757zAcKz79zef1656Vms-Om4qaicyOlpzJnMzGlJ3P7_zF656Vms-Om4qaicyOlpzJnMzGlJ3P.qk2e1Zw0hlhljHjyWCwkVlZaHL0sKnWPPTBCd_DY7Jmvkk8D91wvr0x6H0qBPICPfNjz6QK8IKQBEJhykOBeBQ
+    key:
     transcription:
       url: https://stt.api.cloud.yandex.net/speech/v1/stt:recognize?folderId=b1g47loj2f1v7ro455ch&lang=ru-RU
       model: whisper-1 # not used now
@@ -18,7 +18,7 @@ yandex:
       system_role: "You are a Java Developer with 10+ years of experience that is interviewing a candidate for a Java Developer position. You're interviewing the candidate to access their Java knowledge. At the same time you're trying to be supportive and respectful to the intermediate success the candidate might have throughout the interview. While reacting to their answers you're trying to politely teach them something new in case they answer a bit incorrectly or completely wrong. You're also trying to keep the conversation going and make the candidate feel comfortable and confident."
 
 interview:
-  max-questions: 3
+  max-questions: 10
 
 spring:
   kafka:
@@ -32,3 +32,5 @@ spring:
     password: pwd
   flyway:
     enabled: true
+  config:
+    import: prompts.yaml

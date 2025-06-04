@@ -2,22 +2,11 @@ package com.dmus.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
-import lombok.Data;
 
 import java.util.List;
 
-@Data
 @Builder
-public class GptRequest {
-    @JsonProperty("modelUri")
-    private String model;
-    private List<Message> messages;
-
-    @Data
+public record GptRequest(@JsonProperty("modelUri") String model, List<Message> messages){
     @Builder
-    public static class Message {
-        private String role;
-        @JsonProperty("text")
-        private String content;
-    }
+    public record Message(String role, @JsonProperty("text") String content){}
 }
