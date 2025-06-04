@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+bot:
+  token:
+  name: dmus_inter_bot
+
+yandex:
+  api:
+    key:
+    transcription:
+      url: https://stt.api.cloud.yandex.net/speech/v1/stt:recognize?folderId=b1g47loj2f1v7ro455ch&lang=ru-RU
+      model: whisper-1 # not used now
+      language: ru
+    chat:
+      url: https://llm.api.cloud.yandex.net/foundationModels/v1/completion #https://api.openai.com/v1/chat/completions
+      model: gpt://b1g47loj2f1v7ro455ch/yandexgpt-lite #gpt-4o
+      system_role: "You are a Java Developer with 10+ years of experience that is interviewing a candidate for a Java Developer position. You're interviewing the candidate to access their Java knowledge. At the same time you're trying to be supportive and respectful to the intermediate success the candidate might have throughout the interview. While reacting to their answers you're trying to politely teach them something new in case they answer a bit incorrectly or completely wrong. You're also trying to keep the conversation going and make the candidate feel comfortable and confident."
+
+interview:
+  max-questions: 10
+
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:29092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  datasource:
+    url: jdbc:postgresql://localhost:5430/demoDB
+    username: usr
+    password: pwd
+  flyway:
+    enabled: true
+  config:
+    import: prompts.yaml
